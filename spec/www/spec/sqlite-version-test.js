@@ -107,9 +107,9 @@ var mytests = function() {
 
               // Check specific SQLCipher version on plugin
               if (isAndroid) // (android-database-sqlcipher)
-                expect(rs.rows.item(0).myResult).toBe('3.34.1');
+                expect(rs.rows.item(0).myResult).toBe('3.39.4');
               else // SQLCipher for iOS/macOS/...
-                expect(rs.rows.item(0).myResult).toBe('3.34.1');
+                expect(rs.rows.item(0).myResult).toBe('3.39.4');
 
               // Close (plugin only) & finish:
               (isWebSql) ? done() : db.close(done, done);
@@ -138,9 +138,38 @@ var mytests = function() {
 
               // Check specific SQLCipher version on plugin
               if (isAndroid) // (android-database-sqlcipher)
-                expect(rs.rows.item(0).cipher_version).toBe('4.4.3 community');
+                expect(rs.rows.item(0).cipher_version).toBe('4.5.3 community');
               else // SQLCipher for iOS/macOS/...
-                expect(rs.rows.item(0).cipher_version).toBe('4.4.3 community');
+                expect(rs.rows.item(0).cipher_version).toBe('4.5.3 community');
+
+              // Close (plugin only) & finish:
+              (isWebSql) ? done() : db.close(done, done);
+            });
+          }, function(error) {
+            // NOT EXPECTED:
+            expect(false).toBe(true);
+            expect(error.message).toBe('--');
+            done();
+          });
+        }, MYTIMEOUT);
+
+        it(suiteName + 'math functions', function(done) {
+          if (isWebSql) pending('SKIP for (WebKit) Web SQL');
+          if (!isWebSql && isAndroid && isImpl2) pending('SKIP for plugin on Android with androidDatabaseImplementation: 2');
+
+          var db = openDatabase('check-math-function.db');
+
+          expect(db).toBeDefined();
+
+          db.transaction(function(tx) {
+            expect(tx).toBeDefined();
+
+            tx.executeSql('SELECT -COS(PI()) AS myResult', [], function(tx_ignored, rs) {
+              expect(rs).toBeDefined();
+              expect(rs.rows).toBeDefined();
+              expect(rs.rows.length).toBe(1);
+
+              expect(rs.rows.item(0).myResult).toBe(1);
 
               // Close (plugin only) & finish:
               (isWebSql) ? done() : db.close(done, done);

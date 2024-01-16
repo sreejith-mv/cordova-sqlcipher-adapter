@@ -2,7 +2,7 @@
 <plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
     xmlns:android="http://schemas.android.com/apk/res/android"
     id="cordova-sqlcipher-adapter"
-    version="0.5.4">
+    version="0.6.0">
 
     <name>Cordova sqlcipher adapter</name>
 
@@ -42,8 +42,7 @@
         <source-file src="node_modules/cordova-sqlite-storage-dependencies/libs/sqlite-connector.jar" target-dir="libs"/>
          ...
          -->
-        <lib-file src="src/android/libs/android-database-sqlcipher-classes.jar" />
-        <lib-file src="src/android/libs/android-database-sqlcipher-ndk.jar" />
+        <lib-file src="src/android/libs/android-database-sqlcipher.jar" />
         <!-- androidx.sqlite now required -->
         <framework src="androidx.sqlite:sqlite:2.1.0" />
 
@@ -86,6 +85,7 @@
                                      -DSQLITE_OMIT_PROGRESS_CALLBACK -DSQLITE_OMIT_SHARED_CACHE -DSQLITE_OMIT_LOAD_EXTENSION
                                      -DSQLITE_ENABLE_FTS3 -DSQLITE_ENABLE_FTS3_PARENTHESIS -DSQLITE_ENABLE_FTS4 -DSQLITE_ENABLE_RTREE
                                      -DSQLITE_ENABLE_FTS5 -DSQLITE_ENABLE_JSON1
+                                     -DSQLITE_ENABLE_MATH_FUNCTIONS
                                     " />
 
         <framework src="Security.framework" />
@@ -121,6 +121,7 @@
                                      -DSQLITE_OMIT_PROGRESS_CALLBACK -DSQLITE_OMIT_SHARED_CACHE -DSQLITE_OMIT_LOAD_EXTENSION
                                      -DSQLITE_ENABLE_FTS3 -DSQLITE_ENABLE_FTS3_PARENTHESIS -DSQLITE_ENABLE_FTS4 -DSQLITE_ENABLE_RTREE
                                      -DSQLITE_ENABLE_FTS5 -DSQLITE_ENABLE_JSON1
+                                     -DSQLITE_ENABLE_MATH_FUNCTIONS
                                     " />
 
         <framework src="Security.framework" />
