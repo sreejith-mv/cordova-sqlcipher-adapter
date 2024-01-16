@@ -9,7 +9,7 @@ package io.sqlc;
 // SQLCipher version of database classes:
 import net.sqlcipher.*;
 import net.sqlcipher.database.*;
-
+import android.util.Base64;
 /* ** NOT USED in this plugin version:
 import android.database.Cursor;
 import android.database.CursorWindow;
