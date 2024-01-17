@@ -518,16 +518,18 @@
                         case SQLITE_FLOAT:
                             columnValue = [NSNumber numberWithDouble: sqlite3_column_double(statement, i)];
                             break;
-//                        case SQLITE_BLOB:
-//                            NSData *content = [NSData dataWithBytes:sqlite3_column_blob(statement, i) length:sqlite3_column_bytes(statement, i)];
-//                            if ((content != NULL) && ![content isKindOfClass:[NSNull class]])
-//                            {
-//                                NSRange range = NSMakeRange(1, [content length] - 2);
-//                                NSData *modifiedBinary = [content subdataWithRange:range];
-//                                NSString* base64 = [modifiedBinary base64EncodedStringWithOptions:0];
-//                                columnValue = base64;
-//                            }
-//                            break;
+                        case SQLITE_BLOB:
+                            {
+                                NSData *content = [NSData dataWithBytes:sqlite3_column_blob(statement, i) length:sqlite3_column_bytes(statement, i)];
+                                if ((content != NULL) && ![content isKindOfClass:[NSNull class]])
+                                {
+                                    NSRange range = NSMakeRange(1, [content length] - 2);
+                                    NSData *modifiedBinary = [content subdataWithRange:range];
+                                    NSString* base64 = [modifiedBinary base64EncodedStringWithOptions:0];
+                                    columnValue = base64;
+                                }
+                            }
+                           break;
                         case SQLITE_TEXT:
                             columnValue = [[NSString alloc] initWithBytes:(char *)sqlite3_column_text(statement, i)
                                                                    length:sqlite3_column_bytes(statement, i)
